@@ -25,7 +25,7 @@ namespace Minesweeper.view
             InitializeComponent();
         }
 
-        private void GOBACK_Btn_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.menu;
         }

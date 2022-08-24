@@ -11,5 +11,8 @@ namespace Minesweeper
 
         public static MainWindow mainWindow { get; set; }
 
+        public static int timeSec = 00;
+        public static int timeMin = 00;
+
     }
 }

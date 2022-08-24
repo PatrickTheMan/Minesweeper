@@ -29,23 +29,25 @@
                 </Grid.ColumnDefinitions>
 
                 <Button
-                x:Name="Options_Button"
-                Content="Options"
-                FontSize="20"
-                Grid.Column="1"
-                Grid.Row="0"
-                Click="Options_Button_Click"
+                    x:Name="Options_Button"
+                    Content="Options"
+                    FontSize="20"
+                    Grid.Column="1"
+                    Grid.Row="0"
+                    Click="Options_Button_Click"
+                    Margin="25"
                 >
 
                 </Button>
 
                 <Button
-                x:Name="Play_Button"
-                Content="Play"
-                FontSize="20"
-                Grid.Column="3"
-                Grid.Row="0"
-                Click="Play_Button_Click"
+                    x:Name="Play_Button"
+                    Content="Play"
+                    FontSize="20"
+                    Grid.Column="3"
+                    Grid.Row="0"
+                    Click="Play_Button_Click"
+                    Margin="25"
                 >
 
                 </Button>

@@ -7,11 +7,129 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Button
-                x:Name="GOBACK_Btn"
-            Content="GO BACK"
-            Click="GOBACK_Btn_Click">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid
+            Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Label
+                Grid.Column="1"
+                Content="Options"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                FontSize="30"
+                FontWeight="Bold">
+                
+            </Label>
             
-        </Button>
+        </Grid>
+
+        <Grid
+            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel
+                Orientation="Horizontal"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Column="0"
+                >
+
+                <Label
+                    Content="Width of Field"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    FontWeight="Bold"
+                    >
+                    
+                </Label>
+
+                <TextBox
+                    x:Name="FieldX_Tbox"
+                    Text="10"
+                    Width="200"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Margin="10"
+                    >
+
+                </TextBox>
+
+            </StackPanel>
+
+            <StackPanel
+                Orientation="Horizontal"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Column="1"
+                >
+
+                <Label
+                    Content="Height of Field"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    FontWeight="Bold"
+                    >
+
+                </Label>
+
+                <TextBox
+                    x:Name="FieldY_Tbox"
+                    Text="10"
+                    Width="200"
+                    VerticalContentAlignment="Center"
+                    HorizontalContentAlignment="Center"
+                    Margin="10"
+                    >
+
+                </TextBox>
+
+            </StackPanel>
+
+        </Grid>
+
+        <Grid
+            Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+        </Grid>
+
+        <Grid
+            Grid.Row="3"
+            >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button
+                Grid.Column="1"
+                Content="Save &amp; Back"
+                Margin="10" Click="Button_Click"
+                >
+                
+            </Button>
+            
+        </Grid>
+        
     </Grid>
 </UserControl>

@@ -10,16 +10,67 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="8*"></ColumnDefinition>
+            <ColumnDefinition Width="20*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="20*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
+        <StackPanel
+            Grid.Column="1"
+            Orientation="Horizontal"
+            HorizontalAlignment="Center"
+            >
+            
+            <TextBox
+                x:Name="Bomb_Tbox"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Width="100"
+                IsReadOnly="True"
+                Focusable="False"
+                FontWeight="Bold" 
+                BorderBrush="White" 
+                SelectionBrush="White"
+                >
+
+            </TextBox>
+
+            <TextBox
+                x:Name="Time_Tbox"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Width="200"
+                IsReadOnly="True"
+                Focusable="False"
+                FontWeight="Bold" 
+                BorderBrush="White"
+                SelectionBrush="White"
+                >
+
+            </TextBox>
+
+            <TextBox
+                x:Name="Flag_Tbox"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Width="100"
+                IsReadOnly="True"
+                Focusable="False"
+                FontWeight="Bold" 
+                BorderBrush="White"
+                SelectionBrush="White"
+                >
+
+            </TextBox>
+            
+        </StackPanel>
+        
+        
 
         <ContentControl
             x:Name="ccContainer"
