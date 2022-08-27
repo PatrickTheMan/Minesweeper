@@ -15,19 +15,19 @@ using System.Windows.Shapes;
 
 namespace Minesweeper.View
 {
-    /// <summary>
-    /// Interaction logic for Options.xaml
-    /// </summary>
-    public partial class Options : UserControl
-    {
-        public Options()
-        {
-            InitializeComponent();
-        }
+	/// <summary>
+	/// Interaction logic for YouLoseView.xaml
+	/// </summary>
+	public partial class YouLoseView : UserControl
+	{
+		public YouLoseView()
+		{
+			InitializeComponent();
+		}
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.menu;
-        }
-    }
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.menu;
+		}
+	}
 }

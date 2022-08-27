@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Minesweeper.view
+namespace Minesweeper.View
 {
     /// <summary>
     /// Interaction logic for Game.xaml
@@ -24,5 +24,25 @@ namespace Minesweeper.view
         {
             InitializeComponent();
         }
+        private void UserControl_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+
+			if (e.Delta > 0)
+			{
+                if (ZoomSlider.Value+0.25 <= ZoomSlider.Maximum)
+                {
+					ZoomSlider.Value += 0.25;
+				}
+			}
+			else
+			{
+				if (ZoomSlider.Value - 0.25 >= ZoomSlider.Minimum)
+				{
+					ZoomSlider.Value -= 0.25;
+				}
+			}
+
+		}
+
     }
 }

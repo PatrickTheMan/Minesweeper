@@ -1,24 +1,24 @@
-﻿<UserControl x:Class="Minesweeper.view.Options"
+﻿<UserControl x:Class="Minesweeper.View.Options"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Minesweeper.view"
+             xmlns:local="clr-namespace:Minesweeper.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
             <RowDefinition Height="3*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="75"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Grid
             Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="250"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
@@ -27,7 +27,7 @@
                 Content="Options"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Center"
-                FontSize="30"
+                FontSize="40"
                 FontWeight="Bold">
                 
             </Label>
@@ -41,63 +41,81 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <StackPanel
-                Orientation="Horizontal"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label
+                Content=": Width of Field :"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                FontWeight="Bold"
                 Grid.Column="0"
+                Grid.Row="0"
+                    >
+
+            </Label>
+
+            <TextBox
+                x:Name="FieldX_Tbox"
+                Text="10"
+                Grid.Column="0"
+                Grid.Row="1"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Margin="25,0,25,0"
                 >
 
-                <Label
-                    Content="Width of Field"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    FontWeight="Bold"
-                    >
-                    
-                </Label>
+            </TextBox>
 
-                <TextBox
-                    x:Name="FieldX_Tbox"
-                    Text="10"
-                    Width="200"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    Margin="10"
-                    >
+            <Label
+                Content=": Height of Field :"
+                Grid.Column="0"
+                Grid.Row="2"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                FontWeight="Bold"
+                >
 
-                </TextBox>
+            </Label>
 
-            </StackPanel>
+            <TextBox
+                x:Name="FieldY_Tbox"
+                Text="10"
+                Grid.Column="0"
+                Grid.Row="3"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Margin="25,0,25,0"
+                >
 
-            <StackPanel
-                Orientation="Horizontal"
-                VerticalAlignment="Center"
-                HorizontalAlignment="Center"
+            </TextBox>
+
+            <Label
+                Content=": Bomb% of fields :"
                 Grid.Column="1"
+                Grid.Row="0"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                FontWeight="Bold"
                 >
 
-                <Label
-                    Content="Height of Field"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    FontWeight="Bold"
+            </Label>
+
+            <TextBox
+                x:Name="FieldBombPercent_Tbox"
+                Text="10"
+                Grid.Column="1"
+                Grid.Row="1"
+                VerticalContentAlignment="Center"
+                HorizontalContentAlignment="Center"
+                Margin="25,0,25,0"
                     >
 
-                </Label>
-
-                <TextBox
-                    x:Name="FieldY_Tbox"
-                    Text="10"
-                    Width="200"
-                    VerticalContentAlignment="Center"
-                    HorizontalContentAlignment="Center"
-                    Margin="10"
-                    >
-
-                </TextBox>
-
-            </StackPanel>
+            </TextBox>
 
         </Grid>
 
@@ -110,6 +128,9 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
+
+            
+
         </Grid>
 
         <Grid
@@ -117,14 +138,16 @@
             >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="350"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <Button
                 Grid.Column="1"
                 Content="Save &amp; Back"
-                Margin="10" Click="Button_Click"
+                Margin="10"
+                FontSize="25"
+                Click="Button_Click"
                 >
                 
             </Button>

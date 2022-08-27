@@ -1,12 +1,49 @@
-﻿<UserControl x:Class="Minesweeper.view.Game"
+﻿<UserControl x:Class="Minesweeper.View.Game"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Minesweeper.view"
+             xmlns:local="clr-namespace:Minesweeper.View"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             MouseWheel="UserControl_MouseWheel">
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto"
+                      Grid.Column="0"
+                      Grid.Row="0"
+                      x:Name="Container_SP"
+                      MouseWheel="UserControl_MouseWheel">
+
+
+
+
+
+                <ScrollViewer.LayoutTransform>
+                    <ScaleTransform ScaleX="{Binding ElementName=ZoomSlider, Path=Value}" ScaleY="{Binding ElementName=ZoomSlider, Path=Value}" />
+                </ScrollViewer.LayoutTransform>
+
+        </ScrollViewer>
+
+        <Slider x:Name="ZoomSlider"
+                Orientation="Horizontal"
+                Minimum="0.5"
+                Maximum="4.0"
+                LargeChange="0.25"
+                SmallChange="0.01"
+                Value="1.0"
+                Grid.Column="1"
+                Grid.Row="1"
+                Margin="0,10,0,0"
+                >
+
+        </Slider>
 
     </Grid>
 </UserControl>

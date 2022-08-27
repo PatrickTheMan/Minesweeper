@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,8 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-namespace Minesweeper.view
+namespace Minesweeper.View
 {
     /// <summary>
     /// Interaction logic for Menu.xaml
@@ -32,61 +34,143 @@ namespace Minesweeper.view
             MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.options;
         }
 
-        private void Play_Button_Click(object sender, RoutedEventArgs e)
+		private Grid map;
+		private int bombsLeft;
+
+		private void Play_Button_Click(object sender, RoutedEventArgs e)
         {
-            int mapX = int.Parse(MyWindow.mainWindow.options.FieldX_Tbox.Text);
-			int mapY = int.Parse(MyWindow.mainWindow.options.FieldY_Tbox.Text);
+			VariablesContainer.fieldsLeft = 0;
 
-			Grid map = new Grid();
+			try
+			{
+				VariablesContainer.mapX = int.Parse(MyWindow.mainWindow.options.FieldY_Tbox.Text);
+			}
+			catch (Exception)
+			{
+				VariablesContainer.mapX = 10;
+			}
+			try
+			{
+				VariablesContainer.mapY = int.Parse(MyWindow.mainWindow.options.FieldY_Tbox.Text);
+			}
+			catch (Exception)
+			{
+				VariablesContainer.mapY = 10;
+			}
+			try
+			{
+				VariablesContainer.bombPercent = int.Parse(MyWindow.mainWindow.options.FieldBombPercent_Tbox.Text);
+			}
+			catch (Exception)
+			{
+				VariablesContainer.bombPercent = 10;
+			}
 
+
+			int mapX = VariablesContainer.mapX;
+			int mapY = VariablesContainer.mapY;
+			int bombPercent = VariablesContainer.bombPercent;
+
+			map = new Grid();
+
+			// Cal bomb amount
+			if (bombPercent>90)
+			{
+				bombsLeft = (mapX * mapY) / 100 * 99;
+			} else if (bombPercent<=0)
+			{
+				bombsLeft = (mapX * mapY) / 100 * 1;
+			}
+			else
+			{
+				bombsLeft = (mapX * mapY) / 100 * bombPercent;
+			}
+			
+
+			// Set map x amount of columns
             map.SetValue(Grid.ColumnProperty, 1);
             for (int i = 0; i < mapX; i++)
             {
 				map.ColumnDefinitions.Add(new ColumnDefinition());
             }
 
+			// Set map y amount of rows
 			map.SetValue(Grid.RowProperty, 1);
 			for (int i = 0; i < mapY; i++)
 			{
 				map.RowDefinitions.Add(new RowDefinition());
 			}
 
-            for (int i = 0; i < mapX; i++)
-            {
-                for (int j = 0; j < mapY; j++)
-                {
+			// Spawn bombs in a line
+			for (int i = 0; i < mapX; i++)
+			{
+				AddLineOfFieldsThread(i, mapY);
+			}
 
-					Field f = new Field(map);
-					f.Margin = new Thickness(0.5);
-
-					Grid.SetColumn(f, i);
-					Grid.SetRow(f, j);
-
-					map.Children.Add(f);
-
-				}
-            }
+			// Place bombs
+			PlaceBombs(mapX, mapY);
 
 			// Register neighborFields
 			for (int i = 0; i < mapX; i++)
 			{
-				for (int j = 0; j < mapY; j++)
-				{
-
-					((Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == i && Grid.GetColumn(a) == j)).RegisterSurroundingFields();
-
-				}
+				RegisterNeighborFieldsThread(i,mapY);
 			}
 
+			MyWindow.mainWindow.game.Container_SP.Content = map;
+
+
+			// Set container to game
+			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.game;
+
+
+		}
+
+		private void AddLineOfFieldsThread(int xPosition, int yAmount)
+		{
+
+			for (int j = 0; j < yAmount; j++)
+			{
+				Field f;
+
+				f = new Field(map);
+
+				Grid.SetColumn(f, xPosition);
+				Grid.SetRow(f, j);
+
+				map.Children.Add(f);
+
+			}
 			
+		}
 
+		private void RegisterNeighborFieldsThread(int xPosition, int yAmount)
+		{
+			for (int i = 0; i < yAmount; i++)
+			{
 
-			MyWindow.mainWindow.game.Content = map;
+				((Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == xPosition && Grid.GetColumn(a) == i)).RegisterSurroundingFields();
 
+			}
+		}
 
-            // Start game
-            MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.game;
-        }
+		private void PlaceBombs(int mapX, int mapY)
+		{
+			Random r = new Random();
 
-    }
+			while (bombsLeft != 0)
+			{
+				int x = r.Next(mapX);
+				int y = r.Next(mapY);
+
+				if (!((Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == x && Grid.GetColumn(a) == y)).IsBomb())
+				{
+					((Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == x && Grid.GetColumn(a) == y)).SetBomb();
+					bombsLeft--;
+				}
+
+			}
+
+		}
+
+	}
 }

@@ -21,23 +21,22 @@ namespace Minesweeper
     public partial class MainWindow : Window
     {
 
-        public view.Options options = new view.Options();
-        public view.Game game = new view.Game();
-        public view.Menu menu = new view.Menu();
+        public View.Options options = new View.Options();
+        public View.Game game = new View.Game();
+        public View.Menu menu = new View.Menu();
+        public View.YouLoseView youLose = new View.YouLoseView();
+		public View.YouWinView youwin = new View.YouWinView();
 
-        public MainWindow()
+		public MainWindow()
         {
 
             InitializeComponent();
 
-            ccContainer.Content = menu;
+			ccContainer.Content = menu;
 
             MyWindow.mainWindow = this;
 
         }
 
-
-
-        
-    }
+	}
 }
