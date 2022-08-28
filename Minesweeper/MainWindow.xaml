@@ -20,6 +20,23 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
+        <Button
+            x:Name="Menu_Btn"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            Foreground="Transparent"
+            Click="Menu_Btn_Click"
+            >
+
+            <Image
+                Source="\img\menu.png"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+                
+            </Image>
+            
+        </Button>
+
         <StackPanel
             Grid.Column="1"
             Orientation="Horizontal"
@@ -36,6 +53,7 @@
                 FontWeight="Bold" 
                 BorderBrush="White" 
                 SelectionBrush="White"
+                Text="{Binding Path = BombsLeft}"
                 >
 
             </TextBox>

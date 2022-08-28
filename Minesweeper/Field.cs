@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Minesweeper
 {
@@ -32,12 +34,12 @@ namespace Minesweeper
 			this.VerticalContentAlignment = VerticalAlignment.Center;
 			this.HorizontalContentAlignment = HorizontalAlignment.Center;
 
-			this.Background = VariablesContainer.mainFieldColor;
+			this.Background = Model.GameModel.mainFieldColor;
 
 			this.Click += (s, e) => { this.ClickField(); };
 			this.PreviewMouseRightButtonUp += this.RightClick;
 
-			VariablesContainer.fieldsLeft++;
+			Model.GameModel.fieldsLeft++;
 		}
 
 		public void RegisterSurroundingFields()
@@ -46,8 +48,8 @@ namespace Minesweeper
             int x = Grid.GetColumn(this);
 			int y = Grid.GetRow(this);
 
-			int xMax = VariablesContainer.mapX;
-			int yMax = VariablesContainer.mapY;
+			int xMax = Model.GameModel.mapX;
+			int yMax = Model.GameModel.mapY;
 
 
 			for (int i = x - 1; i < 2 + x; i++)
@@ -85,7 +87,7 @@ namespace Minesweeper
         public void SetBomb()
         {
             this.bomb = true;
-			VariablesContainer.fieldsLeft--;
+			Model.GameModel.fieldsLeft--;
 		}
 
         public bool IsBomb()
@@ -141,7 +143,7 @@ namespace Minesweeper
 				b.Background = Brushes.Red;
 
 				grid.Children.Add(b);
-				
+
 				// LOSE
 				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.youLose;
 
@@ -165,7 +167,7 @@ namespace Minesweeper
 
 				grid.Children.Add(b);
 
-				VariablesContainer.fieldsLeft--;
+				Model.GameModel.fieldsLeft--;
 
 			} else
 			{
@@ -177,11 +179,11 @@ namespace Minesweeper
 
 				grid.Children.Add(b);
 
-				VariablesContainer.fieldsLeft--;
+				Model.GameModel.fieldsLeft--;
 
 			}
 
-			if (VariablesContainer.fieldsLeft==0)
+			if (Model.GameModel.fieldsLeft==0)
 			{
 				// WIN
 				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.youwin;
@@ -196,11 +198,20 @@ namespace Minesweeper
 			if (flagged)
 			{
 				this.flagged = false;
-				this.Background = Brushes.LightGray;
+				this.Content = null;
 			} else
 			{
 				this.flagged = true;
-				this.Background = Brushes.Green;
+				Image img = new Image
+				{
+					Source = new BitmapImage(new Uri(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"Source\Repos\PatrickTheMan\Minesweeper\Minesweeper\img", "Flag 32x32.png"))),
+					VerticalAlignment = VerticalAlignment.Stretch,
+					HorizontalAlignment = HorizontalAlignment.Stretch,
+				};
+				img.Width = 10;
+				img.Height = 10;
+
+				this.Content = img;
 			}
 		}
 

@@ -27,6 +27,8 @@ namespace Minesweeper
         public View.YouLoseView youLose = new View.YouLoseView();
 		public View.YouWinView youwin = new View.YouWinView();
 
+        public Model.GameModel gameModel = new Model.GameModel();
+
 		public MainWindow()
         {
 
@@ -34,9 +36,15 @@ namespace Minesweeper
 
 			ccContainer.Content = menu;
 
+            this.DataContext = gameModel;
+
             MyWindow.mainWindow = this;
 
         }
 
-	}
+        private void Menu_Btn_Click(object sender, RoutedEventArgs e)
+        {
+			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.menu;
+        }
+    }
 }
