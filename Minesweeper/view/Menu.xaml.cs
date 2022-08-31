@@ -39,6 +39,8 @@ namespace Minesweeper.View
 
 		private void Play_Button_Click(object sender, RoutedEventArgs e)
         {
+			System.Diagnostics.Debug.WriteLine("Done");
+
 			Model.GameModel.fieldsLeft = 0;
 
 			try
@@ -56,75 +58,75 @@ namespace Minesweeper.View
 			catch (Exception)
 			{
 				Model.GameModel.mapY = 10;
-
-				try
-				{
-					Model.GameModel.bombPercent = int.Parse(MyWindow.mainWindow.options.FieldBombPercent_Tbox.Text);
-				}
-				catch (Exception)
-				{
-					Model.GameModel.bombPercent = 10;
-				}
-
-
-				int mapX = Model.GameModel.mapX;
-				int mapY = Model.GameModel.mapY;
-				int bombPercent = Model.GameModel.bombPercent;
-
-				map = new Grid();
-
-				// Cal bomb amount
-				if (bombPercent > 90)
-				{
-					bombsLeft = (mapX * mapY) / 100 * 99;
-				}
-				else if (bombPercent <= 0)
-				{
-					bombsLeft = (mapX * mapY) / 100 * 1;
-				}
-				else
-				{
-					bombsLeft = (mapX * mapY) / 100 * bombPercent;
-				}
-
-
-				// Set map x amount of columns
-				map.SetValue(Grid.ColumnProperty, 1);
-				for (int i = 0; i < mapX; i++)
-				{
-					map.ColumnDefinitions.Add(new ColumnDefinition());
-				}
-
-				// Set map y amount of rows
-				map.SetValue(Grid.RowProperty, 1);
-				for (int i = 0; i < mapY; i++)
-				{
-					map.RowDefinitions.Add(new RowDefinition());
-				}
-
-				// Spawn bombs in a line
-				for (int i = 0; i < mapX; i++)
-				{
-					AddLineOfFieldsThread(i, mapY);
-				}
-
-				// Place bombs
-				PlaceBombs(mapX, mapY);
-
-				// Register neighborFields
-				for (int i = 0; i < mapX; i++)
-				{
-					RegisterNeighborFieldsThread(i, mapY);
-				}
-
-
-				MyWindow.mainWindow.game.Container_SP.Content = map;
-
-
-				// Set container to game
-				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.game;
-
 			}
+
+			try
+			{
+				Model.GameModel.bombPercent = int.Parse(MyWindow.mainWindow.options.FieldBombPercent_Tbox.Text);
+			}
+			catch (Exception)
+			{
+				Model.GameModel.bombPercent = 10;
+			}
+
+
+			int mapX = Model.GameModel.mapX;
+			int mapY = Model.GameModel.mapY;
+			int bombPercent = Model.GameModel.bombPercent;
+
+			map = new Grid();
+
+			// Cal bomb amount
+			if (bombPercent > 90)
+			{
+				bombsLeft = (mapX * mapY) / 100 * 99;
+			}
+			else if (bombPercent <= 0)
+			{
+				bombsLeft = (mapX * mapY) / 100 * 1;
+			}
+			else
+			{
+				bombsLeft = (mapX * mapY) / 100 * bombPercent;
+			}
+
+
+			// Set map x amount of columns
+			map.SetValue(Grid.ColumnProperty, 1);
+			for (int i = 0; i < mapX; i++)
+			{
+				map.ColumnDefinitions.Add(new ColumnDefinition());
+			}
+
+			// Set map y amount of rows
+			map.SetValue(Grid.RowProperty, 1);
+			for (int i = 0; i < mapY; i++)
+			{
+				map.RowDefinitions.Add(new RowDefinition());
+			}
+
+			// Spawn bombs in a line
+			for (int i = 0; i < mapX; i++)
+			{
+				AddLineOfFieldsThread(i, mapY);
+			}
+
+			// Place bombs
+			PlaceBombs(mapX, mapY);
+
+			// Register neighborFields
+			for (int i = 0; i < mapX; i++)
+			{
+				RegisterNeighborFieldsThread(i, mapY);
+			}
+
+
+			MyWindow.mainWindow.game.Container_SP.Content = map;
+
+
+			// Set container to game
+			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.game;
+
 		}
 
 		private void AddLineOfFieldsThread(int xPosition, int yAmount)
