@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Minesweeper.View
 {
 	/// <summary>
-	/// Interaction logic for YouWinView.xaml
+	/// Interaction logic for FinishedView.xaml
 	/// </summary>
-	public partial class YouWinView : UserControl
+	public partial class FinishedView : UserControl
 	{
-		public YouWinView()
+		public FinishedView()
 		{
 			InitializeComponent();
 		}

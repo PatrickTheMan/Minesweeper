@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Minesweeper.View.YouLoseView"
+﻿<UserControl x:Class="Minesweeper.View.FinishedView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -22,8 +22,9 @@
             </Grid.ColumnDefinitions>
 
             <Label
+                x:Name="Headline"
                 Grid.Column="1"
-                Content="You Lose"
+                Content="Headline"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Center"
                 FontSize="50"
@@ -35,7 +36,7 @@
 
         <Grid
             Grid.Row="1">
-            
+
         </Grid>
 
         <Grid

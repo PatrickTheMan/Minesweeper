@@ -24,8 +24,7 @@ namespace Minesweeper
         public View.Options options = new View.Options();
         public View.Game game = new View.Game();
         public View.Menu menu = new View.Menu();
-        public View.YouLoseView youLose = new View.YouLoseView();
-		public View.YouWinView youwin = new View.YouWinView();
+        public View.FinishedView finished = new View.FinishedView();
 
         public Model.GameModel gameModel = new Model.GameModel();
 

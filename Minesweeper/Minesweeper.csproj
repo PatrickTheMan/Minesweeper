@@ -63,6 +63,9 @@
     <Compile Include="TestingWindow.xaml.cs">
       <DependentUpon>TestingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\FinishedView.xaml.cs">
+      <DependentUpon>FinishedView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Game.xaml.cs">
       <DependentUpon>Game.xaml</DependentUpon>
     </Compile>
@@ -71,12 +74,6 @@
     </Compile>
     <Compile Include="View\Options.xaml.cs">
       <DependentUpon>Options.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\YouLoseView.xaml.cs">
-      <DependentUpon>YouLoseView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\YouWinView.xaml.cs">
-      <DependentUpon>YouWinView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +91,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\FinishedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Game.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -103,14 +104,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Options.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\YouLoseView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\YouWinView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

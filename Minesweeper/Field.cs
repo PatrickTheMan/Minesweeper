@@ -145,7 +145,8 @@ namespace Minesweeper
 				grid.Children.Add(b);
 
 				// LOSE
-				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.youLose;
+				MyWindow.mainWindow.finished.Headline.Content = "You Lose";
+				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.finished;
 
 			} else if (this.val > 0)
 			{
@@ -186,7 +187,8 @@ namespace Minesweeper
 			if (Model.GameModel.fieldsLeft==0)
 			{
 				// WIN
-				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.youwin;
+				MyWindow.mainWindow.finished.Headline.Content = "You Win";
+				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.finished;
 			}
 
 			this.revealed = true;
