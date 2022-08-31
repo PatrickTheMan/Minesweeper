@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -39,7 +40,7 @@ namespace Minesweeper
 			this.Click += (s, e) => { this.ClickField(); };
 			this.PreviewMouseRightButtonUp += this.RightClick;
 
-			Model.GameModel.fieldsLeft++;
+			MyWindow.mainWindow.gameModel.FieldsLeft++;
 		}
 
 		public void RegisterSurroundingFields()
@@ -48,8 +49,8 @@ namespace Minesweeper
             int x = Grid.GetColumn(this);
 			int y = Grid.GetRow(this);
 
-			int xMax = Model.GameModel.mapX;
-			int yMax = Model.GameModel.mapY;
+			int xMax = MyWindow.mainWindow.gameModel.MapX;
+			int yMax = MyWindow.mainWindow.gameModel.MapY;
 
 
 			for (int i = x - 1; i < 2 + x; i++)
@@ -87,7 +88,8 @@ namespace Minesweeper
         public void SetBomb()
         {
             this.bomb = true;
-			Model.GameModel.fieldsLeft--;
+			MyWindow.mainWindow.gameModel.FieldsLeft--;
+			MyWindow.mainWindow.gameModel.BombAmount++;
 		}
 
         public bool IsBomb()
@@ -104,6 +106,69 @@ namespace Minesweeper
 		{
 			grid.Children.Remove(this);
 		}
+
+		public void RevealBomb()
+		{
+			grid.Children.Remove(this);
+
+			int x = Grid.GetColumn(this);
+			int y = Grid.GetRow(this);
+
+			Button b = new Button();
+			b.Width = this.Width;
+			b.Height = this.Height;
+			b.HorizontalContentAlignment = HorizontalAlignment.Center;
+			b.VerticalContentAlignment = VerticalAlignment.Center;
+			b.FontSize = 10;
+			b.Background = Brushes.White;
+			b.IsEnabled = false;
+			Grid.SetColumn(b, x);
+			Grid.SetRow(b, y);
+
+			if (this.revealed)
+			{
+				return;
+			}
+
+			Image img = new Image
+			{
+				Source = new BitmapImage(new Uri(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"Source\Repos\PatrickTheMan\Minesweeper\Minesweeper\img", "bomb 32x32 v2.png"))),
+				VerticalAlignment = VerticalAlignment.Stretch,
+				HorizontalAlignment = HorizontalAlignment.Stretch,
+			};
+			img.Width = 10;
+			img.Height = 10;
+			b.Content = img;
+
+			grid.Children.Add(b);
+		}
+
+		public void FinishedState()
+		{
+			grid.Children.Remove(this);
+
+			int x = Grid.GetColumn(this);
+			int y = Grid.GetRow(this);
+
+			Button b = new Button();
+			b.Width = this.Width;
+			b.Height = this.Height;
+			b.HorizontalContentAlignment = HorizontalAlignment.Center;
+			b.VerticalContentAlignment = VerticalAlignment.Center;
+			b.FontSize = 10;
+			b.Background = Brushes.Red;
+			b.IsHitTestVisible = false;
+			Grid.SetColumn(b, x);
+			Grid.SetRow(b, y);
+
+			if (this.revealed)
+			{
+				return;
+			}
+
+			grid.Children.Add(b);
+		}
+
 
         public void ClickField()
         {
@@ -138,15 +203,36 @@ namespace Minesweeper
 				return;
 			} else if (this.bomb)
 			{
-				System.Diagnostics.Debug.WriteLine("Bomb");
-
-				b.Background = Brushes.Red;
+				Image img = new Image
+				{
+					Source = new BitmapImage(new Uri(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), @"Source\Repos\PatrickTheMan\Minesweeper\Minesweeper\img", "bomb 32x32 v2.png"))),
+					VerticalAlignment = VerticalAlignment.Stretch,
+					HorizontalAlignment = HorizontalAlignment.Stretch,
+				};
+				img.Width = 10;
+				img.Height = 10;
+				b.Content = img;
 
 				grid.Children.Add(b);
 
+
+				foreach (Field f in MyWindow.mainWindow.gameModel.BombFields)
+				{
+					f.RevealBomb();
+				}
+				foreach (Field f in MyWindow.mainWindow.gameModel.NormalFields)
+				{
+					f.FinishedState();
+				}
+				MyWindow.mainWindow.gameModel.BombFields.Clear();
+				MyWindow.mainWindow.gameModel.NormalFields.Clear();
+
 				// LOSE
+				MyWindow.mainWindow.gameModel.DonePercent = 0;
+				MyWindow.mainWindow.timeThread.Suspend();
 				MyWindow.mainWindow.finished.Headline.Content = "You Lose";
-				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.finished;
+
+				MyWindow.mainWindow.changeThread.Start();
 
 			} else if (this.val > 0)
 			{
@@ -168,7 +254,7 @@ namespace Minesweeper
 
 				grid.Children.Add(b);
 
-				Model.GameModel.fieldsLeft--;
+				MyWindow.mainWindow.gameModel.FieldsLeft--;
 
 			} else
 			{
@@ -180,15 +266,25 @@ namespace Minesweeper
 
 				grid.Children.Add(b);
 
-				Model.GameModel.fieldsLeft--;
+				MyWindow.mainWindow.gameModel.FieldsLeft--;
 
 			}
 
-			if (Model.GameModel.fieldsLeft==0)
+			if (MyWindow.mainWindow.gameModel.FieldsLeft == 0)
 			{
+				foreach (Field f in MyWindow.mainWindow.gameModel.BombFields)
+				{
+					f.RevealBomb();
+				}
+				MyWindow.mainWindow.gameModel.BombFields.Clear();
+				MyWindow.mainWindow.gameModel.NormalFields.Clear();
+
 				// WIN
+				MyWindow.mainWindow.gameModel.DonePercent = 1;
+				MyWindow.mainWindow.timeThread.Suspend();
 				MyWindow.mainWindow.finished.Headline.Content = "You Win";
-				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.finished;
+
+				MyWindow.mainWindow.changeThread.Start();
 			}
 
 			this.revealed = true;
@@ -201,6 +297,7 @@ namespace Minesweeper
 			{
 				this.flagged = false;
 				this.Content = null;
+				MyWindow.mainWindow.gameModel.FlaggedAmount--;
 			} else
 			{
 				this.flagged = true;
@@ -214,6 +311,7 @@ namespace Minesweeper
 				img.Height = 10;
 
 				this.Content = img;
+				MyWindow.mainWindow.gameModel.FlaggedAmount++;
 			}
 		}
 

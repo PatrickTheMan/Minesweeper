@@ -126,7 +126,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Font\Minecraft.ttf" />
+    <Resource Include="Fonts\Minecraft.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -140,6 +140,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\Flag 32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Bomb 32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Bomb 32x32 v2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\world-of-minesweeper.JPG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

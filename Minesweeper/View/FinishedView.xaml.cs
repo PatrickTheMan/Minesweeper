@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Minesweeper.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +29,12 @@ namespace Minesweeper.View
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
+			MyWindow.mainWindow.gameModel.BombAmount = 0;
+			MyWindow.mainWindow.gameModel.FlaggedAmount = 0;
+			MyWindow.mainWindow.gameModel.TimeSec = "00";
+			MyWindow.mainWindow.gameModel.TimeMin = "00";
+
+			MyWindow.mainWindow.changeThread = new Thread(new ThreadStart(MainWindow.ChangingSceneToFinished));
 			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.menu;
 		}
 	}

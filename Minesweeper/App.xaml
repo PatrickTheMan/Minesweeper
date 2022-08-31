@@ -4,6 +4,7 @@
              xmlns:local="clr-namespace:Minesweeper"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <FontFamily x:Key="Minecraft"></FontFamily>
     </Application.Resources>
+
 </Application>

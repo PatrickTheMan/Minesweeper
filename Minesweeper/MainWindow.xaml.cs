@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -28,13 +28,15 @@ namespace Minesweeper
 
         public Model.GameModel gameModel = new Model.GameModel();
 
+        public Thread timeThread = new Thread(new ThreadStart(Model.GameModel.TimeThread));
+		public Thread changeThread = new Thread(new ThreadStart(ChangingSceneToFinished));
+
 		public MainWindow()
         {
 
             InitializeComponent();
 
 			ccContainer.Content = menu;
-
             this.DataContext = gameModel;
 
             MyWindow.mainWindow = this;
@@ -43,7 +45,31 @@ namespace Minesweeper
 
         private void Menu_Btn_Click(object sender, RoutedEventArgs e)
         {
+			MyWindow.mainWindow.gameModel.BombAmount = 0;
+			MyWindow.mainWindow.gameModel.FlaggedAmount = 0;
+			MyWindow.mainWindow.gameModel.TimeSec = "00";
+			MyWindow.mainWindow.gameModel.TimeMin = "00";
+
 			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.menu;
         }
-    }
+
+		public static void ChangingSceneToFinished()
+		{
+
+            Thread.Sleep(3000);
+
+            MyWindow.mainWindow.ActiveDispatcher();
+
+		}
+
+        public void ActiveDispatcher()
+        {
+			Dispatcher.Invoke(() =>
+			{
+				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.finished;
+			});
+		}
+	}
+
+
 }

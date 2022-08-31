@@ -39,40 +39,39 @@ namespace Minesweeper.View
 
 		private void Play_Button_Click(object sender, RoutedEventArgs e)
         {
-			System.Diagnostics.Debug.WriteLine("Done");
 
-			Model.GameModel.fieldsLeft = 0;
-
-			try
-			{
-				Model.GameModel.mapX = int.Parse(MyWindow.mainWindow.options.FieldY_Tbox.Text);
-			}
-			catch (Exception)
-			{
-				Model.GameModel.mapX = 10;
-			}
-			try
-			{
-				Model.GameModel.mapY = int.Parse(MyWindow.mainWindow.options.FieldY_Tbox.Text);
-			}
-			catch (Exception)
-			{
-				Model.GameModel.mapY = 10;
-			}
+			MyWindow.mainWindow.gameModel.FieldsLeft = 0;
 
 			try
 			{
-				Model.GameModel.bombPercent = int.Parse(MyWindow.mainWindow.options.FieldBombPercent_Tbox.Text);
+				MyWindow.mainWindow.gameModel.MapX = int.Parse(MyWindow.mainWindow.options.FieldY_Tbox.Text);
 			}
 			catch (Exception)
 			{
-				Model.GameModel.bombPercent = 10;
+				MyWindow.mainWindow.gameModel.MapX = 10;
+			}
+			try
+			{
+				MyWindow.mainWindow.gameModel.MapY = int.Parse(MyWindow.mainWindow.options.FieldY_Tbox.Text);
+			}
+			catch (Exception)
+			{
+				MyWindow.mainWindow.gameModel.MapY = 10;
+			}
+
+			try
+			{
+				MyWindow.mainWindow.gameModel.BombPercent = int.Parse(MyWindow.mainWindow.options.FieldBombPercent_Tbox.Text);
+			}
+			catch (Exception)
+			{
+				MyWindow.mainWindow.gameModel.BombPercent = 10;
 			}
 
 
-			int mapX = Model.GameModel.mapX;
-			int mapY = Model.GameModel.mapY;
-			int bombPercent = Model.GameModel.bombPercent;
+			int mapX = MyWindow.mainWindow.gameModel.MapX;
+			int mapY = MyWindow.mainWindow.gameModel.MapY;
+			int bombPercent = MyWindow.mainWindow.gameModel.BombPercent;
 
 			map = new Grid();
 
@@ -127,6 +126,15 @@ namespace Minesweeper.View
 			// Set container to game
 			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.game;
 
+			// Start time
+			if (MyWindow.mainWindow.timeThread.ThreadState == ThreadState.Unstarted)
+			{
+				MyWindow.mainWindow.timeThread.Start();
+			} else
+			{
+				MyWindow.mainWindow.timeThread.Resume();
+			}
+			
 		}
 
 		private void AddLineOfFieldsThread(int xPosition, int yAmount)
@@ -137,6 +145,7 @@ namespace Minesweeper.View
 				Field f;
 
 				f = new Field(map);
+				MyWindow.mainWindow.gameModel.NormalFields.Add(f);
 
 				Grid.SetColumn(f, xPosition);
 				Grid.SetRow(f, j);
@@ -166,9 +175,13 @@ namespace Minesweeper.View
 				int x = r.Next(mapX);
 				int y = r.Next(mapY);
 
-				if (!((Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == x && Grid.GetColumn(a) == y)).IsBomb())
+				Field f = (Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == x && Grid.GetColumn(a) == y);
+
+				if (!f.IsBomb())
 				{
-					((Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == x && Grid.GetColumn(a) == y)).SetBomb();
+					f.SetBomb();
+					MyWindow.mainWindow.gameModel.BombFields.Add(f);
+					MyWindow.mainWindow.gameModel.NormalFields.Remove(f);
 					bombsLeft--;
 				}
 

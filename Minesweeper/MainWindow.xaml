@@ -37,56 +37,99 @@
             
         </Button>
 
-        <StackPanel
-            Grid.Column="1"
-            Orientation="Horizontal"
-            HorizontalAlignment="Center"
-            >
-            
-            <TextBox
-                x:Name="Bomb_Tbox"
-                VerticalContentAlignment="Center"
-                HorizontalContentAlignment="Center"
-                Width="100"
-                IsReadOnly="True"
-                Focusable="False"
-                FontWeight="Bold" 
-                BorderBrush="White" 
-                SelectionBrush="White"
-                Text="{Binding Path = BombsLeft}"
-                >
+        <Viewbox
+            Grid.Column="1">
+            <Grid
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-            </TextBox>
+                <StackPanel
+                Grid.Column="0"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
 
-            <TextBox
-                x:Name="Time_Tbox"
-                VerticalContentAlignment="Center"
-                HorizontalContentAlignment="Center"
-                Width="200"
-                IsReadOnly="True"
-                Focusable="False"
-                FontWeight="Bold" 
-                BorderBrush="White"
-                SelectionBrush="White"
-                >
+                    <Image
+                        Source="/img/Bomb 32x32.png">
 
-            </TextBox>
+                    </Image>
 
-            <TextBox
-                x:Name="Flag_Tbox"
-                VerticalContentAlignment="Center"
-                HorizontalContentAlignment="Center"
-                Width="100"
-                IsReadOnly="True"
-                Focusable="False"
-                FontWeight="Bold" 
-                BorderBrush="White"
-                SelectionBrush="White"
-                >
+                    <Label
+                    Content="{Binding Path = BombAmount, Mode=TwoWay}"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                    >
 
-            </TextBox>
-            
-        </StackPanel>
+                    </Label>
+
+                </StackPanel>
+
+                <StackPanel
+                Grid.Column="1"
+                Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+
+                    <Label
+                        Content="{Binding Path = TimeMin, Mode=TwoWay}"
+                        FontWeight="Bold"
+                        Width="100"
+                        HorizontalContentAlignment="Right"
+                    >
+
+                    </Label>
+
+                    <Label
+                        Content=" : "
+                        FontWeight="Bold"
+                    >
+
+                    </Label>
+
+                    <Label
+                        Content="{Binding Path = TimeSec, Mode=TwoWay}"
+                        FontWeight="Bold"
+                        Width="100"
+                    >
+
+                    </Label>
+
+                </StackPanel>
+
+                <StackPanel
+                  Grid.Column="2"
+                  Orientation="Horizontal"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center">
+
+                    <Image
+                        Source="/img/Flag 32x32.png">
+
+                    </Image>
+
+                    <Label
+                        Content="{Binding Path = FlaggedAmount, Mode=TwoWay}"
+                        FontWeight="Bold"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                    >
+
+                    </Label>
+
+                </StackPanel>
+
+            </Grid>
+        </Viewbox>
+        
+        
+
+        
 
 
 

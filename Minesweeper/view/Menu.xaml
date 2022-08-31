@@ -20,7 +20,7 @@
             </Grid.RowDefinitions>
 
         <Image
-            >
+            Source="/img/world-of-minesweeper.jpg">
             
         </Image>
 
