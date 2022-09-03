@@ -40,7 +40,7 @@ namespace Minesweeper.View
 		private void Play_Button_Click(object sender, RoutedEventArgs e)
         {
 
-			MyWindow.mainWindow.gameModel.FieldsLeft = 0;
+            MyWindow.mainWindow.gameModel.FieldsLeft = 0;
 
 			try
 			{
@@ -121,7 +121,6 @@ namespace Minesweeper.View
 
 
 			MyWindow.mainWindow.game.Container_SP.Content = map;
-
 
 			// Set container to game
 			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.game;

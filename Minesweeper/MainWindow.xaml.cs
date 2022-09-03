@@ -25,6 +25,7 @@ namespace Minesweeper
         public View.Game game = new View.Game();
         public View.Menu menu = new View.Menu();
         public View.FinishedView finished = new View.FinishedView();
+        public View.LoadingView loading = new View.LoadingView();
 
         public Model.GameModel gameModel = new Model.GameModel();
 
@@ -58,16 +59,25 @@ namespace Minesweeper
 
             Thread.Sleep(3000);
 
-            MyWindow.mainWindow.ActiveDispatcher();
+            MyWindow.mainWindow.ActiveDispatcher("finished");
 
 		}
 
-        public void ActiveDispatcher()
+        public void ActiveDispatcher(string view)
         {
-			Dispatcher.Invoke(() =>
-			{
-				MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.finished;
-			});
+            switch (view)
+            {
+                case "finished":
+                    {
+                        Dispatcher.Invoke(() =>
+                        {
+                            MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.finished;
+                        });
+
+                        break;
+                    }
+            }
+			
 		}
 	}
 
