@@ -21,12 +21,21 @@ namespace Minesweeper.View
     public partial class LoadingView : UserControl
     {
 
+        #region Models
+
         public Model.LoadingViewModel loadingViewModel = new Model.LoadingViewModel();
+
+        #endregion Models
+
+        #region Constructor
         public LoadingView()
         {
             this.DataContext = loadingViewModel;
 
             InitializeComponent();
         }
+
+        #endregion Constructor
+
     }
 }

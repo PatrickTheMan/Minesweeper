@@ -20,10 +20,16 @@ namespace Minesweeper.View
     /// </summary>
     public partial class Game : UserControl
     {
+
+        #region Constructor
         public Game()
         {
             InitializeComponent();
         }
+
+        #endregion Constructor
+
+        #region UserActions
         private void UserControl_MouseWheel(object sender, MouseWheelEventArgs e)
         {
 
@@ -43,6 +49,8 @@ namespace Minesweeper.View
 			}
 
 		}
+
+        #endregion UserActions
 
     }
 }

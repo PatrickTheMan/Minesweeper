@@ -12,11 +12,19 @@ namespace Minesweeper.Model
 {
 	public class GameModel : INotifyPropertyChanged
 	{
-		public List<Field> BombFields = new List<Field>();
+
+        #region Variables
+
+        public List<Field> BombFields = new List<Field>();
 		public List<Field> NormalFields = new List<Field>();
 
-		#region
-		private string timeSec = "00";
+        public static Brush mainFieldColor = Brushes.LightGray;
+
+        #endregion Variables
+
+        #region Time Properties & Thread
+
+        private string timeSec = "00";
 
 		public string TimeSec
 		{
@@ -70,7 +78,9 @@ namespace Minesweeper.Model
 			}
 		}
 
-		#endregion
+		#endregion Time Properties & Thread
+
+		#region Game Properties
 
 		private int bombAmount;
 
@@ -145,15 +155,17 @@ namespace Minesweeper.Model
 			}
 		}
 
+		#endregion Game Properties
 
-		public static Brush mainFieldColor = Brushes.LightGray;
-
-
+		#region PropertyChangedEventHandler & Method
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
+
+		#endregion
+
 	}
 }

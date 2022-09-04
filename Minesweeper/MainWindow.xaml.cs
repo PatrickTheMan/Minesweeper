@@ -21,18 +21,32 @@ namespace Minesweeper
     public partial class MainWindow : Window
     {
 
+        #region Views
+
         public View.Options options = new View.Options();
         public View.Game game = new View.Game();
         public View.Menu menu = new View.Menu();
         public View.FinishedView finished = new View.FinishedView();
         public View.LoadingView loading = new View.LoadingView();
 
+        #endregion Views
+
+        #region Models
+
         public Model.GameModel gameModel = new Model.GameModel();
+
+        #endregion Models
+
+        #region Threads
 
         public Thread timeThread = new Thread(new ThreadStart(Model.GameModel.TimeThread));
 		public Thread changeThread = new Thread(new ThreadStart(ChangingSceneToFinished));
 
-		public MainWindow()
+        #endregion Threads
+
+        #region Constructor
+
+        public MainWindow()
         {
 
             InitializeComponent();
@@ -44,6 +58,9 @@ namespace Minesweeper
 
         }
 
+        #endregion Constructor
+
+        #region Buttons
         private void Menu_Btn_Click(object sender, RoutedEventArgs e)
         {
             MyWindow.mainWindow.timeThread.Suspend();
@@ -55,7 +72,10 @@ namespace Minesweeper
 			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.menu;
         }
 
-		public static void ChangingSceneToFinished()
+        #endregion Buttons
+
+        #region Public Methods
+        public static void ChangingSceneToFinished()
 		{
 
             Thread.Sleep(3000);
@@ -80,7 +100,10 @@ namespace Minesweeper
             }
 			
 		}
-	}
+
+        #endregion Public Methods
+
+    }
 
 
 }

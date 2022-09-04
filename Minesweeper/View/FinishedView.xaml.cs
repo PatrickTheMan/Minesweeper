@@ -22,12 +22,17 @@ namespace Minesweeper.View
 	/// </summary>
 	public partial class FinishedView : UserControl
 	{
-		public FinishedView()
+
+        #region Constructor
+        public FinishedView()
 		{
 			InitializeComponent();
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e)
+        #endregion Constructor
+
+        #region Buttons
+        private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			MyWindow.mainWindow.gameModel.BombAmount = 0;
 			MyWindow.mainWindow.gameModel.FlaggedAmount = 0;
@@ -37,5 +42,8 @@ namespace Minesweeper.View
 			MyWindow.mainWindow.changeThread = new Thread(new ThreadStart(MainWindow.ChangingSceneToFinished));
 			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.menu;
 		}
-	}
+
+        #endregion Buttons
+
+    }
 }

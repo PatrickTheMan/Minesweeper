@@ -16,6 +16,8 @@ namespace Minesweeper
     public class Field : Button
     {
 
+		#region Variables
+
 		private bool revealed = false;
         private bool bomb = false;
         private bool flagged = false;
@@ -25,6 +27,10 @@ namespace Minesweeper
         private Grid grid;
 
         private List<Field> neighborFields = new List<Field>();
+
+		#endregion Variables
+
+		#region Constructor
 
 		public Field(Grid grid)
 		{
@@ -42,6 +48,10 @@ namespace Minesweeper
 
 			MyWindow.mainWindow.gameModel.FieldsLeft++;
 		}
+
+		#endregion Constructor
+
+		#region Public Methods
 
 		public void RegisterSurroundingFields()
         {
@@ -169,6 +179,9 @@ namespace Minesweeper
 			grid.Children.Add(b);
 		}
 
+		#endregion Public Methods
+
+		#region Click Methods
 
         public void ClickField()
         {
@@ -314,6 +327,8 @@ namespace Minesweeper
 				MyWindow.mainWindow.gameModel.FlaggedAmount++;
 			}
 		}
+
+		#endregion Click Methods
 
     }
 }

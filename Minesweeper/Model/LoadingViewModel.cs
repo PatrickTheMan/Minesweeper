@@ -11,6 +11,8 @@ namespace Minesweeper.Model
     public class LoadingViewModel : INotifyPropertyChanged
     {
 
+		#region Properties
+
 		private double progress = 0;
 
 		public double Progress
@@ -26,11 +28,17 @@ namespace Minesweeper.Model
 			set { loadingText = value; NotifyPropertyChanged(); }
 		}
 
+		#endregion Properties
+
+		#region PropertyChangedEventHandler & Method
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+		#endregion PropertyChangedEventHandler & Method
 
     }
 }

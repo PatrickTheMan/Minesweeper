@@ -22,20 +22,20 @@ namespace Minesweeper.View
     /// </summary>
     public partial class Menu : UserControl
     {
-        
 
+        #region Constructor
         public Menu()
         {
             InitializeComponent();
         }
 
+        #endregion Constructor
+
+        #region Buttons
         private void Options_Button_Click(object sender, RoutedEventArgs e)
         {
 			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.options;
         }
-
-        private Grid map;
-		private int bombsLeft;
 
 		private void Play_Button_Click(object sender, RoutedEventArgs e)
         {
@@ -48,7 +48,18 @@ namespace Minesweeper.View
 
 		}
 
-		public void CreateNewGameThread()
+        #endregion Buttons
+
+        #region Variables
+
+        private Grid map;
+        private int bombsLeft;
+
+        #endregion Variables
+
+        #region GameThread
+
+        public void CreateNewGameThread()
 		{
 
             System.Diagnostics.Debug.WriteLine("Invoke");
@@ -259,6 +270,10 @@ namespace Minesweeper.View
             });
 		}
 
+        #endregion GameThread
+
+        #region Private Methods
+
 		private void AddLineOfFieldsThread(int mapX, int mapY)
 		{
             double currentField = 0.0;
@@ -316,7 +331,7 @@ namespace Minesweeper.View
             }
 		}
 
-        public void RegisterNeighbor(int mapX, int mapY, double currentLine)
+        private void RegisterNeighbor(int mapX, int mapY, double currentLine)
         {
             double currentField = 0.0;
 
@@ -364,6 +379,8 @@ namespace Minesweeper.View
 
             }
 		}
+
+        #endregion Private Methods
 
 	}
 }

@@ -20,11 +20,16 @@ namespace Minesweeper.View
     /// </summary>
     public partial class Options : UserControl
     {
+
+        #region Constructor
         public Options()
         {
             InitializeComponent();
         }
 
+        #endregion Constructor
+
+        #region Buttons
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 			MyWindow.mainWindow.ccContainer.Content = MyWindow.mainWindow.menu;
@@ -78,6 +83,7 @@ namespace Minesweeper.View
 			this.FieldBombPercent_Tbox.Text = "20";
 		}
 
+        #endregion Buttons
 
-	}
+    }
 }
