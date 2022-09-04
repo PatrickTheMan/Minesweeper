@@ -46,7 +46,8 @@ namespace Minesweeper
 
         private void Menu_Btn_Click(object sender, RoutedEventArgs e)
         {
-			MyWindow.mainWindow.gameModel.BombAmount = 0;
+            MyWindow.mainWindow.timeThread.Suspend();
+            MyWindow.mainWindow.gameModel.BombAmount = 0;
 			MyWindow.mainWindow.gameModel.FlaggedAmount = 0;
 			MyWindow.mainWindow.gameModel.TimeSec = "00";
 			MyWindow.mainWindow.gameModel.TimeMin = "00";

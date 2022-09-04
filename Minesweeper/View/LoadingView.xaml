@@ -46,7 +46,7 @@
         <ProgressBar
             Grid.Column="1"
             Grid.Row="2"
-            Value="{Binding Path=Progress}">
+            Value="{Binding Path=Progress, Mode=TwoWay}">
             
         </ProgressBar>
         
