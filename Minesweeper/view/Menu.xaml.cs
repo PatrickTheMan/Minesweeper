@@ -73,7 +73,7 @@ namespace Minesweeper.View
             Dispatcher.Invoke(() =>
             {
                 MyWindow.mainWindow.loading.loadingViewModel.Progress = 0;
-                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Read Settings";
+                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Read Settings ( 1 / 6 )";
             });
 
             Thread.Sleep(100);
@@ -148,7 +148,7 @@ namespace Minesweeper.View
             Dispatcher.Invoke(() =>
             {
                 MyWindow.mainWindow.loading.loadingViewModel.Progress = 0;
-                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Setting Map X";
+                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Setting Map X ( 2 / 6 )";
             });
 
             Thread.Sleep(100);
@@ -170,7 +170,7 @@ namespace Minesweeper.View
             Dispatcher.Invoke(() =>
             {
                 MyWindow.mainWindow.loading.loadingViewModel.Progress = 0;
-                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Setting Map Y";
+                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Setting Map Y ( 3 / 6 )";
             });
 
             Thread.Sleep(100);
@@ -194,7 +194,7 @@ namespace Minesweeper.View
             Dispatcher.Invoke(() =>
             {
                 MyWindow.mainWindow.loading.loadingViewModel.Progress = 0;
-                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Creating Map";
+                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Creating Map ( 4 / 6 )";
             });
 
             Thread.Sleep(100);
@@ -209,7 +209,7 @@ namespace Minesweeper.View
             Dispatcher.Invoke(() =>
             {
                 MyWindow.mainWindow.loading.loadingViewModel.Progress = 0;
-                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Placing Bombs";
+                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Placing Bombs ( 5 / 6 )";
             });
 
             Thread.Sleep(100);
@@ -224,7 +224,7 @@ namespace Minesweeper.View
             Dispatcher.Invoke(() =>
             {
                 MyWindow.mainWindow.loading.loadingViewModel.Progress = 0;
-                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Register Neighbors On Fields";
+                MyWindow.mainWindow.loading.loadingViewModel.LoadingText = "Register Neighbors On Fields ( 6 / 6 )";
             });
 
             Thread.Sleep(100);
@@ -284,9 +284,11 @@ namespace Minesweeper.View
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        MyWindow.mainWindow.loading.loadingViewModel.Progress = Math.Round((currentField / (mapX * mapY) * 100), 0);
-                        System.Diagnostics.Debug.WriteLine(MyWindow.mainWindow.loading.loadingViewModel.Progress);
-                    
+                        if (MyWindow.mainWindow.loading.loadingViewModel.Progress < Math.Round((currentField / (mapX * mapY) * 100), 0))
+                        {
+                            MyWindow.mainWindow.loading.loadingViewModel.Progress = Math.Round((currentField / (mapX * mapY) * 100), 0);
+                            System.Diagnostics.Debug.WriteLine(MyWindow.mainWindow.loading.loadingViewModel.Progress);
+                        }
 
                         Field f;
 
@@ -316,8 +318,11 @@ namespace Minesweeper.View
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        MyWindow.mainWindow.loading.loadingViewModel.Progress = Math.Round((currentField / ((mapX) * mapY) * 100), 0);
-                        System.Diagnostics.Debug.WriteLine(MyWindow.mainWindow.loading.loadingViewModel.Progress);
+                        if (MyWindow.mainWindow.loading.loadingViewModel.Progress < Math.Round((currentField / ((mapX) * mapY) * 100), 0))
+                        {
+                            MyWindow.mainWindow.loading.loadingViewModel.Progress = Math.Round((currentField / ((mapX) * mapY) * 100), 0);
+                            System.Diagnostics.Debug.WriteLine(MyWindow.mainWindow.loading.loadingViewModel.Progress);
+                        }
 
                         ((Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == i && Grid.GetColumn(a) == j)).RegisterSurroundingFields();
                     });
@@ -339,8 +344,11 @@ namespace Minesweeper.View
             {
                 Dispatcher.Invoke(() =>
                 {
-                    MyWindow.mainWindow.loading.loadingViewModel.Progress = Math.Round((currentField * currentLine / ((mapX) * mapY) * 100), 0);
-                    System.Diagnostics.Debug.WriteLine(MyWindow.mainWindow.loading.loadingViewModel.Progress);
+                    if (MyWindow.mainWindow.loading.loadingViewModel.Progress < Math.Round((currentField * currentLine / ((mapX) * mapY) * 100), 0))
+                    {
+                        MyWindow.mainWindow.loading.loadingViewModel.Progress = Math.Round((currentField * currentLine / ((mapX) * mapY) * 100), 0);
+                        System.Diagnostics.Debug.WriteLine(MyWindow.mainWindow.loading.loadingViewModel.Progress);
+                    }
 
                     ((Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == currentLine && Grid.GetColumn(a) == j)).RegisterSurroundingFields();
                 });
@@ -359,9 +367,11 @@ namespace Minesweeper.View
 
                 Dispatcher.Invoke(() =>
                 {
-                    MyWindow.mainWindow.loading.loadingViewModel.Progress = Math.Round(100 - ((double)bombsLeft / tempBombMax * 100), 0);
-                
-                System.Diagnostics.Debug.WriteLine(MyWindow.mainWindow.loading.loadingViewModel.Progress);
+                    if (MyWindow.mainWindow.loading.loadingViewModel.Progress < Math.Round(100 - ((double)bombsLeft / tempBombMax * 100), 0))
+                    {
+                        MyWindow.mainWindow.loading.loadingViewModel.Progress = Math.Round(100 - ((double)bombsLeft / tempBombMax * 100), 0);
+                        System.Diagnostics.Debug.WriteLine(MyWindow.mainWindow.loading.loadingViewModel.Progress);
+                    }
 
                     int x = r.Next(mapX);
 				    int y = r.Next(mapY);

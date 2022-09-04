@@ -15,15 +15,16 @@
 
         <Grid.RowDefinitions>
             <RowDefinition Height="4*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Viewbox
             Grid.Column="1"
             Grid.Row="0">
             <Label
-                Content="Loading"
+                Content="Loading..."
                 FontSize="40"
                 FontWeight="Bold"
                 HorizontalAlignment="Center"
@@ -34,7 +35,7 @@
 
         <Viewbox
             Grid.Column="1"
-            Grid.Row="1">
+            Grid.Row="2">
 
             <Label
                 Content="{Binding Path=LoadingText, Mode=TwoWay}">
@@ -45,7 +46,7 @@
 
         <ProgressBar
             Grid.Column="1"
-            Grid.Row="2"
+            Grid.Row="1"
             Value="{Binding Path=Progress, Mode=TwoWay}">
             
         </ProgressBar>
