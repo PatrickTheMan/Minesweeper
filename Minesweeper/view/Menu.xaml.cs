@@ -316,6 +316,9 @@ namespace Minesweeper.View
             {
                 for (int j = 0; j < mapY; j++)
                 {
+
+                    currentField++;
+
                     Dispatcher.Invoke(() =>
                     {
                         if (MyWindow.mainWindow.loading.loadingViewModel.Progress < Math.Round((currentField / ((mapX) * mapY) * 100), 0))
@@ -326,8 +329,6 @@ namespace Minesweeper.View
 
                         ((Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == i && Grid.GetColumn(a) == j)).RegisterSurroundingFields();
                     });
-
-                    currentField++;
                 }
 
                 // I TRIED MULTI-Threading BUT IT WAS SLOWER - IDK WHY THO
@@ -342,6 +343,8 @@ namespace Minesweeper.View
 
             for (int j = 0; j < mapY; j++)
             {
+                currentField++;
+
                 Dispatcher.Invoke(() =>
                 {
                     if (MyWindow.mainWindow.loading.loadingViewModel.Progress < Math.Round((currentField * currentLine / ((mapX) * mapY) * 100), 0))
@@ -352,8 +355,6 @@ namespace Minesweeper.View
 
                     ((Field)map.Children.Cast<UIElement>().First(a => Grid.GetRow(a) == currentLine && Grid.GetColumn(a) == j)).RegisterSurroundingFields();
                 });
-
-                currentField++;
             }
         }
 
